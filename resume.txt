@@ -3,7 +3,7 @@ RAVURI HARSHAVARDHAN
 Address: Hyderabad, Telangana, India
 Phone: +91-8712900170 | Email: ravuriharsha01@gmail.com
 LinkedIn: https://in.linkedin.com/in/ravuri-harshavardhan-52220726b | GitHub: https://github.com/HarshaJrDev
-Portfolio: https://harsha-portfolio-kappa.vercel.app | Open Source: https://github.com/HarshaJrDev/OpenOTA
+Portfolio: https://harshaportfolio-ebon.vercel.app | Open Source: https://github.com/HarshaJrDev/OpenOTA
 
 PROFESSIONAL SUMMARY
 Professional React Native Developer with 2+ years of experience building scalable, high-performance
