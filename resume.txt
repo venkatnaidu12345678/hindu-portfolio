@@ -1,0 +1,134 @@
+RESUME
+RAVURI HARSHAVARDHAN
+Address: Hyderabad, Telangana, India
+Phone: +91-8712900170 | Email: ravuriharsha01@gmail.com
+LinkedIn: https://in.linkedin.com/in/ravuri-harshavardhan-52220726b | GitHub: https://github.com/HarshaJrDev
+Portfolio: https://harsha-portfolio-kappa.vercel.app | Open Source: https://github.com/HarshaJrDev/OpenOTA
+
+PROFESSIONAL SUMMARY
+Professional React Native Developer with 2+ years of experience building scalable, high-performance
+mobile applications for Android and iOS. Skilled in React Native, TypeScript, Node.js, Express.js,
+MongoDB, and Firebase for end-to-end mobile and full-stack product delivery. Expertise in REST API
+design, real-time systems, authentication, and production-grade mobile architecture. Known for strong
+problem-solving skills, clean-architecture discipline, and the ability to thrive in fast-moving product
+teams. Creator and maintainer of OpenOTA, an open-source over-the-air update system for React Native.
+Adept at owning features end-to-end — from mobile UI through backend APIs to app-store deployment.
+
+PROFESSIONAL EXPERIENCE
+
+React Native Developer
+Techefficio Solutions, Hyderabad, India
+Feb 2026 – Till Now
+Roles & Responsibilities
+• Developing scalable Android and iOS applications using React Native and TypeScript.
+• Implementing clean architecture patterns and production-grade reusable systems.
+• Collaborating with cross-functional teams to deliver high-quality mobile experiences.
+• Optimizing performance, responsiveness, and application stability.
+
+React Native Developer
+Algorizz Technologies
+Mar 2025 – Dec 2025
+Roles & Responsibilities
+• Delivered production-ready mobile features for Android and iOS platforms.
+• Implemented subscription workflows and premium access systems.
+• Integrated REST APIs with optimized network handling and error management.
+• Improved application stability and reduced production issues.
+
+React Native Developer (Contract)
+WebSeeder Technologies
+Apr 2025 – May 2025
+Roles & Responsibilities
+• Built and refactored reusable UI components, improving development consistency.
+• Improved navigation flows and reduced unnecessary re-renders for smoother UX.
+• Integrated third-party APIs with proper error handling and response management.
+
+React Native Developer (Part-Time)
+Bliptyn Technologies
+Dec 2024 – Mar 2025
+Roles & Responsibilities
+• Developed new application modules using React Native and TypeScript.
+• Implemented real-time updates and communication using WebSockets.
+• Resolved navigation and state management related issues.
+
+React Native Developer
+Freelance
+2025 – Till Now
+Roles & Responsibilities
+• Developing custom mobile applications for startup and business clients.
+• Delivering scalable mobile solutions including UI implementation, API integration, and deployment.
+• Collaborating directly with clients to transform business requirements into production-ready applications.
+
+React Native Intern
+WebMOBI
+Aug 2024 – Dec 2024
+Roles & Responsibilities
+• Worked on React Native application development and feature implementation.
+• Assisted in API integrations, debugging, and mobile UI development.
+• Gained hands-on experience in scalable mobile application workflows.
+
+KEY PROJECT EXPERIENCE
+
+NearDeals (Location-Based Commerce Platform)                                            Production
+Technology Used: React Native, Node.js, Express.js, MongoDB, REST APIs
+• A location-based marketplace enabling users to discover nearby deals, offers, stores, and local
+  businesses — supporting both single dealers and multi-branch chain dealers, each with an independent
+  catalog and store profile.
+• Developed and maintained core React Native mobile features and the product/catalog backend domain
+  (models, services, controllers, validation).
+• Integrated REST APIs, authentication, and real-time data synchronization.
+• Implemented location-based store and product discovery, ranking results by distance.
+• Optimized application performance, navigation, and state management for production release.
+• Implemented push notifications and a scalable backend architecture supporting a growing store network.
+Android: https://play.google.com/store/apps/details?id=com.neardeals
+
+OpenOTA (Open Source — Creator & Maintainer)                                              Ongoing
+Technology Used: React Native, Node.js, Open Source (GitHub)
+• An open-source over-the-air (OTA) update system for React Native applications, enabling teams to ship
+  JavaScript-bundle updates directly to users without waiting on app-store review cycles.
+• Designed and built the release-channel and update-delivery workflow for React Native apps.
+• Implemented rollback support so a bad release can be reverted without a new app-store build.
+• Built the client-side integration SDK for checking, downloading, and applying bundle updates.
+• Maintained as a public open-source repository for the React Native developer community.
+GitHub: https://github.com/HarshaJrDev/OpenOTA
+
+HubbleMeet (Professional Networking Platform)
+Technology Used: React Native, Firebase, Redux, Node.js
+• A professional networking application enabling QR-based digital business cards, video profiles, and
+  real-time communication.
+• Implemented swipe-based networking workflows and profile discovery.
+• Developed QR-based virtual business card systems.
+• Integrated real-time chat, video upload, and subscription workflows.
+Android: https://play.google.com/store/apps/details?id=com.hubble.app
+iOS: https://apps.apple.com/in/app/hubblemeet/id6752544354
+
+Dandar Health (Healthcare Platform)
+Technology Used: React Native, Firebase, Video SDK
+• A healthcare and telemedicine platform supporting appointments, online consultations, and medicine
+  ordering.
+• Implemented appointment booking and online consultation systems.
+• Ensured secure handling of user and healthcare-related data.
+Android: https://play.google.com/store/apps/details?id=com.dandarpatient
+
+My Bash Buddy
+Technology Used: React Native, Expo, Firebase
+• A business-focused service application designed for scalable mobile experiences and workflow
+  management, shipped to both Android and iOS.
+Website: https://www.mybashbuddy.com/
+
+Kalanabha Logistics
+Technology Used: React, Firebase
+• A logistics and transport management platform focused on operational workflow and business
+  efficiency, with optimized navigation and API synchronization.
+Website: https://kalanabhalogistics.in/
+
+EDUCATION
+Bachelor of Technology (B.Tech) in Computer Science & Engineering (AI & ML)
+Kalasalingam Academy of Research and Education | 2021 – 2025
+
+TECHNICAL SKILLS
+Mobile: React Native (CLI & Expo), Android, iOS, Play Store & App Store Deployment
+Frontend: TypeScript, JavaScript, React.js, Next.js, Redux
+Backend & Cloud: Node.js, Express.js, Firebase, Supabase, MongoDB, REST API Design
+Core Expertise: REST APIs, WebSockets, Real-Time Systems, Push Notifications, Secure Storage,
+System Design, Performance Optimization, Open Source (OTA Release Management)
+Tools: Git, GitHub, Android Studio, Xcode, VS Code, Postman, CI/CD

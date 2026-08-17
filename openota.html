@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenOTA Case Study — Open Source OTA Updates for React Native by Ravuri Harsha</title>
+<meta name="description" content="OpenOTA is Ravuri Harsha's open-source over-the-air update system for React Native, with release channels and rollback. Architecture, workflow, and engineering decisions.">
+<meta name="keywords" content="OpenOTA, Ravuri Harsha, React Native OTA updates, open source React Native, release channels, rollback, CodePush alternative">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://harsha-portfolio-kappa.vercel.app/openota">
+<link rel="manifest" href="site.webmanifest">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2305050a'/%3E%3Ctext x='50' y='68' font-family='monospace' font-size='54' font-weight='700' fill='%23b8ff4f' text-anchor='middle'%3ERH%3C/text%3E%3C/svg%3E">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Ravuri Harsha">
+<meta property="og:title" content="OpenOTA — Open Source OTA Updates for React Native">
+<meta property="og:description" content="Ravuri Harsha's open-source over-the-air update system for React Native: release channels, rollback, and developer workflow.">
+<meta property="og:url" content="https://harsha-portfolio-kappa.vercel.app/openota">
+<meta property="og:image" content="https://harsha-portfolio-kappa.vercel.app/assets/og-openota.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="OpenOTA — Open Source OTA Updates for React Native">
+<meta name="twitter:description" content="Ravuri Harsha's open-source over-the-air update system for React Native: release channels, rollback, and developer workflow.">
+<meta name="twitter:image" content="https://harsha-portfolio-kappa.vercel.app/assets/og-openota.png">
+<meta name="theme-color" content="#05050a">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fragment+Mono&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "OpenOTA Case Study",
+  "url": "https://harsha-portfolio-kappa.vercel.app/openota",
+  "description": "Engineering case study of OpenOTA, an open-source over-the-air update system for React Native created and maintained by Ravuri Harsha.",
+  "inLanguage": "en",
+  "isPartOf": { "@type": "WebSite", "name": "Ravuri Harsha — Portfolio", "url": "https://harsha-portfolio-kappa.vercel.app/" },
+  "author": { "@type": "Person", "name": "Ravuri Harsha", "url": "https://harsha-portfolio-kappa.vercel.app/" },
+  "about": {
+    "@type": "SoftwareApplication",
+    "name": "OpenOTA",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "React Native (Android, iOS)",
+    "author": { "@type": "Person", "name": "Ravuri Harsha" },
+    "description": "OpenOTA is an open-source over-the-air update system for React Native applications, providing release channels, rollback, and a developer-friendly deployment workflow for JS-bundle updates.",
+    "url": "https://github.com/HarshaJrDev/OpenOTA",
+    "codeRepository": "https://github.com/HarshaJrDev/OpenOTA"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://harsha-portfolio-kappa.vercel.app/" },
+    { "@type": "ListItem", "position": 2, "name": "Open Source", "item": "https://harsha-portfolio-kappa.vercel.app/#opensource" },
+    { "@type": "ListItem", "position": 3, "name": "OpenOTA", "item": "https://harsha-portfolio-kappa.vercel.app/openota" }
+  ]
+}
+</script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#05050a;--fg:#f5f0ff;--p1:#b8ff4f;--p3:#00e5ff;--glass:rgba(255,255,255,0.04);--border:rgba(255,255,255,0.08);color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:'Space Grotesk',sans-serif;line-height:1.7;overflow-x:hidden}
+a{color:var(--p3)}
+:focus-visible{outline:2px solid var(--p1);outline-offset:3px;border-radius:4px}
+.skip-link{position:absolute;top:-60px;left:16px;background:var(--p1);color:#000;padding:12px 20px;border-radius:8px;font-weight:700;z-index:100;transition:top .25s;text-decoration:none}
+.skip-link:focus{top:16px}
+header.top{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.brand{font-family:'Fragment Mono',monospace;font-size:13px;color:var(--p1);letter-spacing:2px;text-decoration:none}
+nav.crumbs{font-family:'Fragment Mono',monospace;font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:1px}
+nav.crumbs a{color:rgba(255,255,255,0.55);text-decoration:none}
+nav.crumbs a:hover{color:var(--p1)}
+main{max-width:820px;margin:0 auto;padding:56px 24px 100px}
+.tag{font-family:'Fragment Mono',monospace;font-size:10px;color:var(--p3);letter-spacing:4px;text-transform:uppercase;margin-bottom:18px}
+.oss-head{display:flex;align-items:center;gap:18px;margin-bottom:18px}
+.oss-head img{width:56px;height:56px;border-radius:14px;border:1px solid var(--border)}
+h1{font-size:clamp(30px,5.5vw,48px);font-weight:700;letter-spacing:-1.5px;line-height:1.05}
+.lede{font-size:18px;color:rgba(255,255,255,0.55);max-width:680px;margin-bottom:32px}
+.cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:44px}
+.pill{display:inline-flex;align-items:center;gap:8px;font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;padding:10px 18px;border-radius:99px;border:1px solid var(--border);background:var(--glass);color:var(--fg);text-decoration:none;transition:all .3s}
+.pill:hover{background:var(--p1);color:#000;border-color:transparent}
+h2{font-size:26px;font-weight:700;margin:44px 0 14px;letter-spacing:-0.5px}
+h3{font-size:17px;font-weight:700;margin:24px 0 8px;color:var(--p3)}
+p{font-size:15.5px;color:rgba(255,255,255,0.6);margin-bottom:14px}
+ul{margin:0 0 16px 20px}
+li{font-size:15px;color:rgba(255,255,255,0.55);margin-bottom:8px}
+.workflow{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}
+.step{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:14px 18px;font-size:13px}
+.step b{color:var(--p3);font-family:'Fragment Mono',monospace;font-size:11px}
+.arrow{color:rgba(255,255,255,0.2)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:20px 0}
+.card{border:1px solid var(--border);border-radius:12px;padding:18px;background:rgba(255,255,255,0.02)}
+.card b{display:block;font-size:14px;margin-bottom:6px;color:var(--fg)}
+.card span{font-size:13px;color:rgba(255,255,255,0.45)}
+.stack{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 40px}
+.stack span{font-size:12px;padding:6px 14px;border-radius:99px;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:rgba(255,255,255,0.65)}
+.related{border-top:1px solid var(--border);margin-top:56px;padding-top:32px}
+.related h2{margin-top:0}
+.related-links{display:flex;flex-wrap:wrap;gap:12px}
+.related-links a{display:inline-block;padding:12px 20px;border:1px solid var(--border);border-radius:12px;text-decoration:none;color:var(--fg);font-size:14px;transition:all .3s}
+.related-links a:hover{border-color:var(--p1);color:var(--p1)}
+footer{padding:28px 24px;border-top:1px solid var(--border);text-align:center;font-family:'Fragment Mono',monospace;font-size:11px;color:rgba(255,255,255,0.25)}
+footer a{color:rgba(255,255,255,0.4)}
+@media(max-width:640px){header.top{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<header class="top">
+  <a href="/" class="brand">RAVURIHARSHA.DEV</a>
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> / <a href="/#opensource">Open Source</a> / <span>OpenOTA</span>
+  </nav>
+</header>
+
+<main id="main">
+  <div class="tag">Open Source · Created &amp; Maintained by Ravuri Harsha</div>
+  <div class="oss-head">
+    <img src="assets/openota-logo.png" alt="OpenOTA logo" width="56" height="56" loading="eager">
+    <h1>OpenOTA: Over-the-Air Updates for React Native</h1>
+  </div>
+  <p class="lede">OpenOTA is an open-source project by <a href="/">Ravuri Harsha</a> — a system that lets React Native teams ship JavaScript-bundle updates directly to users, with release channels and rollback, without waiting on app-store review for every change.</p>
+
+  <div class="cta-row">
+    <a href="https://github.com/HarshaJrDev/OpenOTA" target="_blank" rel="noopener" class="pill">⌥ GitHub Repository</a>
+    <a href="https://github.com/HarshaJrDev/OpenOTA#readme" target="_blank" rel="noopener" class="pill">📄 Documentation</a>
+    <a href="/#opensource" class="pill">← Back to portfolio section</a>
+  </div>
+
+  <h2>Why OpenOTA Exists</h2>
+  <p>React Native's biggest deployment advantage over fully native apps is that most UI and logic changes live in JavaScript, not compiled native code — which means they don't strictly need a new app-store binary. OpenOTA exists to make that advantage safe and structured to use in production: shipping JS-bundle updates directly to installed apps, organized into release channels, with a rollback path if something goes wrong.</p>
+
+  <h2>Problem</h2>
+  <p>Without an OTA layer, every bug fix or copy change in a React Native app has to go through a full app-store review cycle — days of delay on both Android and iOS, even for changes that don't touch native code. Teams need a way to ship JS updates faster while still keeping releases controlled and reversible.</p>
+
+  <h2>How the OTA Workflow Works</h2>
+  <div class="workflow">
+    <div class="step"><b>1</b> Build JS bundle</div>
+    <div class="arrow">→</div>
+    <div class="step"><b>2</b> Publish to a release channel</div>
+    <div class="arrow">→</div>
+    <div class="step"><b>3</b> App checks &amp; downloads update</div>
+    <div class="arrow">→</div>
+    <div class="step"><b>4</b> Apply on next launch</div>
+    <div class="arrow">→</div>
+    <div class="step"><b>5</b> Roll back instantly if needed</div>
+  </div>
+
+  <h2>Architecture &amp; Engineering Decisions</h2>
+  <div class="grid2">
+    <div class="card"><b>React Native integration</b><span>A lightweight client SDK checks for and applies bundle updates with minimal app-side integration effort.</span></div>
+    <div class="card"><b>Release channels</b><span>Ship to staging, beta, or production channels independently — test an update before it reaches every user.</span></div>
+    <div class="card"><b>Rollback</b><span>A bad release can be reverted immediately without publishing a new app-store build.</span></div>
+    <div class="card"><b>Developer workflow</b><span>Deployment is designed to slot into an existing CI/CD pipeline rather than replace it.</span></div>
+  </div>
+
+  <h3>Technology Used</h3>
+  <div class="stack">
+    <span>React Native</span><span>Node.js</span><span>Open Source (GitHub)</span>
+  </div>
+
+  <h2>Engineering Challenges</h2>
+  <ul>
+    <li>Keeping the client-side update check lightweight enough that it doesn't add noticeable startup latency to the host app.</li>
+    <li>Making rollback genuinely safe — reverting a channel needs to be at least as fast and reliable as publishing forward.</li>
+    <li>Designing channels so staging/beta/production releases stay isolated without duplicating configuration per app.</li>
+  </ul>
+
+  <h2>Security Considerations</h2>
+  <p>Because OTA updates change what code actually runs on a user's device, update delivery is treated as a trust boundary: only authenticated publishes can push to a channel, and clients apply updates from a known, versioned source rather than an arbitrary endpoint.</p>
+
+  <h2>Who OpenOTA Is For</h2>
+  <p>Any React Native team that wants faster iteration on JS-level changes — bug fixes, content, minor UI adjustments — without a full app-store review cycle for every release, while keeping the ability to instantly undo a bad update.</p>
+
+  <h2>Result</h2>
+  <p>OpenOTA is maintained as a public, open-source repository on GitHub, available for the React Native developer community to use and contribute to.</p>
+  <div class="cta-row">
+    <a href="https://github.com/HarshaJrDev/OpenOTA" target="_blank" rel="noopener" class="pill">⌥ View on GitHub</a>
+  </div>
+
+  <div class="related">
+    <h2>Related</h2>
+    <div class="related-links">
+      <a href="/neardeals">NearDeals — Location-Based Commerce Platform</a>
+      <a href="/articles/ota-updates-explained">Article: How OTA Updates Work in React Native</a>
+      <a href="/#skills">Ravuri Harsha's Technical Expertise</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  © 2026 Ravuri Harsha · <a href="/">Portfolio</a> · <a href="https://github.com/HarshaJrDev/OpenOTA">OpenOTA on GitHub</a>
+</footer>
+</body>
+</html>

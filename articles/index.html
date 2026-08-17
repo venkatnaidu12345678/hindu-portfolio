@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technical Articles by Ravuri Harsha — React Native, OTA Updates &amp; Backend Architecture</title>
+<meta name="description" content="Technical writing by Ravuri Harsha on React Native architecture, OTA updates, mobile performance, and backend/API design — drawn from production engineering work.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://harsha-portfolio-kappa.vercel.app/articles">
+<link rel="manifest" href="../site.webmanifest">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2305050a'/%3E%3Ctext x='50' y='68' font-family='monospace' font-size='54' font-weight='700' fill='%23b8ff4f' text-anchor='middle'%3ERH%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ravuri Harsha">
+<meta property="og:title" content="Technical Articles by Ravuri Harsha">
+<meta property="og:description" content="Writing on React Native architecture, OTA updates, mobile performance, and backend/API design.">
+<meta property="og:url" content="https://harsha-portfolio-kappa.vercel.app/articles">
+<meta property="og:image" content="https://harsha-portfolio-kappa.vercel.app/assets/social-preview.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Technical Articles by Ravuri Harsha">
+<meta name="twitter:image" content="https://harsha-portfolio-kappa.vercel.app/assets/social-preview.png">
+<meta name="theme-color" content="#05050a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fragment+Mono&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Technical Articles by Ravuri Harsha",
+  "url": "https://harsha-portfolio-kappa.vercel.app/articles",
+  "author": { "@type": "Person", "name": "Ravuri Harsha", "url": "https://harsha-portfolio-kappa.vercel.app/" },
+  "isPartOf": { "@type": "WebSite", "name": "Ravuri Harsha — Portfolio", "url": "https://harsha-portfolio-kappa.vercel.app/" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://harsha-portfolio-kappa.vercel.app/" },
+    { "@type": "ListItem", "position": 2, "name": "Articles", "item": "https://harsha-portfolio-kappa.vercel.app/articles" }
+  ]
+}
+</script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#05050a;--fg:#f5f0ff;--p1:#b8ff4f;--p3:#00e5ff;--glass:rgba(255,255,255,0.04);--border:rgba(255,255,255,0.08);color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:'Space Grotesk',sans-serif;line-height:1.7}
+a{color:var(--p3)}
+:focus-visible{outline:2px solid var(--p1);outline-offset:3px;border-radius:4px}
+header.top{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.brand{font-family:'Fragment Mono',monospace;font-size:13px;color:var(--p1);letter-spacing:2px;text-decoration:none}
+nav.crumbs{font-family:'Fragment Mono',monospace;font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:1px}
+nav.crumbs a{color:rgba(255,255,255,0.55);text-decoration:none}
+nav.crumbs a:hover{color:var(--p1)}
+main{max-width:820px;margin:0 auto;padding:56px 24px 100px}
+.tag{font-family:'Fragment Mono',monospace;font-size:10px;color:var(--p3);letter-spacing:4px;text-transform:uppercase;margin-bottom:18px}
+h1{font-size:clamp(30px,5.5vw,48px);font-weight:700;letter-spacing:-1.5px;margin-bottom:16px}
+.lede{font-size:17px;color:rgba(255,255,255,0.55);max-width:640px;margin-bottom:48px}
+.article-list{display:flex;flex-direction:column;gap:2px}
+.article-card{display:block;text-decoration:none;color:inherit;border:1px solid var(--border);border-radius:16px;padding:26px 28px;background:var(--glass);margin-bottom:14px;transition:all .3s}
+.article-card:hover{border-color:rgba(184,255,79,0.3);transform:translateY(-2px)}
+.a-tag{font-family:'Fragment Mono',monospace;font-size:10px;color:var(--p1);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.a-title{font-size:20px;font-weight:700;margin-bottom:8px}
+.a-desc{font-size:14px;color:rgba(255,255,255,0.45)}
+footer{padding:28px 24px;border-top:1px solid var(--border);text-align:center;font-family:'Fragment Mono',monospace;font-size:11px;color:rgba(255,255,255,0.25)}
+footer a{color:rgba(255,255,255,0.4)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a href="/" class="brand">RAVURIHARSHA.DEV</a>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <span>Articles</span></nav>
+</header>
+
+<main>
+  <div class="tag">Technical Writing</div>
+  <h1>Articles</h1>
+  <p class="lede">Notes on the engineering problems I actually work through — React Native architecture, OTA delivery, and backend design — written by <a href="/">Ravuri Harsha</a>.</p>
+
+  <div class="article-list">
+    <a href="/articles/react-native-architecture" class="article-card">
+      <div class="a-tag">Mobile Architecture</div>
+      <div class="a-title">React Native Architecture Patterns for Production Apps</div>
+      <div class="a-desc">How to structure navigation, state, and the native bridge boundary so a React Native app stays maintainable past its first few screens.</div>
+    </a>
+    <a href="/articles/ota-updates-explained" class="article-card">
+      <div class="a-tag">OTA Updates · OpenOTA</div>
+      <div class="a-title">How Over-the-Air Updates Work in React Native</div>
+      <div class="a-desc">The mechanics behind shipping JS-bundle updates without an app-store review — channels, rollback, and where OTA fits (and doesn't) versus a native release.</div>
+    </a>
+  </div>
+</main>
+
+<footer>© 2026 Ravuri Harsha · <a href="/">Portfolio</a> · <a href="https://github.com/HarshaJrDev">GitHub</a></footer>
+</body>
+</html>
