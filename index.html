@@ -113,6 +113,7 @@
 </script>
 
 <style>
+@view-transition{navigation:auto}
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
   --bg:#05050a;
@@ -417,7 +418,9 @@ section{padding:120px 40px;position:relative;z-index:2;max-width:1400px;margin:0
 .case-copy p{font-size:15.5px;line-height:1.85;color:rgba(255,255,255,0.5);margin-bottom:20px}
 .case-copy h4{font-family:'Fragment Mono',monospace;font-size:11px;color:var(--p1);letter-spacing:2px;text-transform:uppercase;margin:28px 0 10px}
 .case-copy h4:first-child{margin-top:0}
-.case-visual{position:sticky;top:100px;border-radius:20px;overflow:hidden;border:1px solid var(--border);background:var(--glass)}
+.case-visual{position:sticky;top:100px;border-radius:20px;overflow:hidden;border:1px solid var(--border);background:var(--glass);opacity:1}
+.js-ready .case-visual{opacity:0;transform:translateY(24px);clip-path:inset(0 0 100% 0);transition:clip-path 1s var(--ease) .1s,opacity .8s var(--ease),transform .8s var(--ease)}
+.case-visual.in{opacity:1;transform:translateY(0);clip-path:inset(0 0 0% 0)}
 .case-visual img{width:100%;height:auto;display:block;transition:opacity .35s ease,transform .5s var(--ease)}
 .case-visual:hover img{transform:scale(1.015)}
 .case-visual-cap{padding:16px 20px;font-family:'Fragment Mono',monospace;font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:1px;border-top:1px solid var(--border);transition:opacity .3s ease}
@@ -439,10 +442,15 @@ section{padding:120px 40px;position:relative;z-index:2;max-width:1400px;margin:0
 
 /* OPEN SOURCE */
 #opensource{background:linear-gradient(180deg,transparent,rgba(0,229,255,0.03),transparent)}
-.oss-card{background:var(--glass);border:1px solid rgba(0,229,255,0.15);border-radius:24px;padding:48px;position:relative;overflow:hidden}
-.oss-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 90% 0%,rgba(0,229,255,0.08),transparent 60%);pointer-events:none}
+.oss-card{background:var(--glass);border:1px solid rgba(0,229,255,0.15);border-radius:24px;padding:48px;position:relative;overflow:hidden;animation:ossGlow 7s ease-in-out infinite}
+.oss-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 90% 0%,rgba(0,229,255,0.1),transparent 60%),radial-gradient(ellipse 40% 30% at 5% 100%,rgba(184,255,79,0.06),transparent 60%);pointer-events:none}
+@keyframes ossGlow{
+  0%,100%{box-shadow:0 0 0 1px rgba(0,229,255,0.12),0 24px 60px -20px rgba(0,229,255,0.08)}
+  50%{box-shadow:0 0 0 1px rgba(184,255,79,0.2),0 24px 70px -16px rgba(184,255,79,0.12)}
+}
 .oss-top{display:flex;gap:24px;align-items:center;margin-bottom:28px;flex-wrap:wrap;position:relative;z-index:1}
-.oss-logo{width:64px;height:64px;border-radius:16px;overflow:hidden;border:1px solid var(--border);flex-shrink:0}
+.oss-logo{width:64px;height:64px;border-radius:16px;overflow:hidden;border:1px solid var(--border);flex-shrink:0;box-shadow:0 8px 30px rgba(0,229,255,0.15);transition:transform .5s var(--ease)}
+.oss-card:hover .oss-logo{transform:scale(1.05) rotate(-3deg)}
 .oss-logo img{width:100%;height:100%;object-fit:cover}
 .oss-titles h3{font-size:32px;font-weight:700;letter-spacing:-1px}
 .oss-titles span{font-family:'Fragment Mono',monospace;font-size:11px;color:var(--p3);letter-spacing:2px;text-transform:uppercase}
@@ -500,6 +508,8 @@ footer{padding:32px 40px;border-top:1px solid var(--border);display:flex;justify
 @media (prefers-reduced-motion: reduce){
   *{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important;scroll-behavior:auto !important}
   .reveal,.js-ready .reveal{opacity:1 !important;transform:none !important}
+  .js-ready .case-visual,.case-visual.in{clip-path:inset(0 0 0% 0) !important;opacity:1 !important;transform:none !important}
+  .oss-card{animation:none !important}
 }
 
 /* MOBILE */
@@ -1171,7 +1181,7 @@ footer{padding:32px 40px;border-top:1px solid var(--border);display:flex;justify
       </div>
     </div>
 
-    <div class="case-visual reveal delay-2">
+    <div class="case-visual" id="caseVisual">
       <div class="case-gallery">
         <button type="button" class="gallery-thumb active" data-img="assets/neardeals-home.jpeg" data-cap="Home screen · location-aware discovery, categories &amp; nearby stores" data-w="370" data-h="800" aria-label="Show home screen">Home</button>
         <button type="button" class="gallery-thumb" data-img="assets/neardeals-product-detail.jpeg" data-cap="Product detail screen · specs, offers &amp; verified dealer contact card" data-w="358" data-h="800" aria-label="Show product detail screen">Product</button>
@@ -1370,11 +1380,43 @@ if (!reduceMotion && !isTouch) {
 }
 
 // SCROLL REVEAL (falls back to all-visible if IntersectionObserver is unsupported)
+// Auto-staggers siblings within the same grid/list that don't already carry a manual delay-N class.
+function applyAutoStagger(el) {
+  if (el.dataset.staggered || /\bdelay-\d\b/.test(el.className)) return;
+  el.dataset.staggered = '1';
+  const parent = el.parentElement;
+  if (!parent) return;
+  const siblings = Array.from(parent.children).filter(c => c.classList && c.classList.contains('reveal'));
+  const idx = siblings.indexOf(el);
+  if (siblings.length > 1 && idx > 0) {
+    el.style.transitionDelay = Math.min(idx * 0.07, 0.42) + 's';
+  }
+}
 if ('IntersectionObserver' in window) {
-  const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); }), { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  const obs = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) {
+      applyAutoStagger(e.target);
+      e.target.classList.add('in');
+    }
+  }), { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 } else {
   document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+}
+
+// CASE-STUDY IMAGE REVEAL — driven by the (non-sticky) parent section rather than the
+// sticky image itself, since IntersectionObserver can miss position:sticky targets.
+const caseVisual = document.getElementById('caseVisual');
+const neardealsSection = document.getElementById('neardeals');
+if (caseVisual && neardealsSection) {
+  if ('IntersectionObserver' in window) {
+    const imgObs = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { caseVisual.classList.add('in'); imgObs.disconnect(); }
+    }), { threshold: 0.1 });
+    imgObs.observe(neardealsSection);
+  } else {
+    caseVisual.classList.add('in');
+  }
 }
 
 // COUNTERS
