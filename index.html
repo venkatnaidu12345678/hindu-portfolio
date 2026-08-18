@@ -230,6 +230,17 @@ nav{
 }
 .word-2{color:transparent;-webkit-text-stroke:1.5px var(--p2);display:block}
 .word-3{color:var(--fg);display:block;font-size:0.55em;opacity:.6;font-weight:600}
+.glitch{position:relative;display:inline-block;cursor:pointer}
+.glitch::before,.glitch::after{content:attr(data-text);position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;pointer-events:none}
+.glitch::before{color:var(--p3);clip-path:polygon(0 15%,100% 15%,100% 42%,0 42%);text-shadow:-2px 0 8px rgba(0,229,255,0.6)}
+.glitch::after{color:var(--p2);clip-path:polygon(0 58%,100% 58%,100% 85%,0 85%);text-shadow:2px 0 8px rgba(255,45,120,0.6)}
+.glitch:hover{animation:glitchShake 0.4s steps(2)}
+.glitch:hover::before{opacity:1;animation:glitchShift1 0.4s steps(2)}
+.glitch:hover::after{opacity:1;animation:glitchShift2 0.4s steps(2)}
+@keyframes glitchShake{0%,100%{transform:translate(0,0)}20%{transform:translate(-2px,1px)}40%{transform:translate(2px,-1px)}60%{transform:translate(-1px,-1px)}80%{transform:translate(1px,1px)}}
+@keyframes glitchShift1{0%,100%{transform:translate(0,0)}20%{transform:translate(-5px,-2px)}40%{transform:translate(5px,2px)}60%{transform:translate(-4px,1px)}80%{transform:translate(4px,-1px)}}
+@keyframes glitchShift2{0%,100%{transform:translate(0,0)}20%{transform:translate(5px,2px)}40%{transform:translate(-5px,-2px)}60%{transform:translate(4px,-1px)}80%{transform:translate(-4px,1px)}}
+@media(hover:none){.glitch:active{animation:glitchShake 0.4s steps(2)}.glitch:active::before{opacity:1;animation:glitchShift1 0.4s steps(2)}.glitch:active::after{opacity:1;animation:glitchShift2 0.4s steps(2)}}
 .hero-position{font-size:clamp(15px,2vw,18px);color:var(--p1);font-weight:600;letter-spacing:.2px;margin-bottom:18px;opacity:0;animation:slideIn 0.9s ease forwards 0.6s}
 .hero-role{font-size:clamp(14px,2vw,19px);color:rgba(255,255,255,0.5);font-weight:400;letter-spacing:.2px;margin-bottom:28px;opacity:0;animation:slideIn 0.9s ease forwards 0.7s;max-width:640px;line-height:1.6}
 .hero-role strong{color:var(--fg);font-weight:600}
@@ -487,10 +498,11 @@ footer{padding:32px 40px;border-top:1px solid var(--border);display:flex;justify
 .delay-4{transition-delay:0.32s}
 
 @media (prefers-reduced-motion: reduce){
-  *{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important;scroll-behavior:auto !important}
+  *,*::before,*::after{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important;scroll-behavior:auto !important}
   .reveal,.js-ready .reveal{opacity:1 !important;transform:none !important}
   .js-ready .case-visual,.case-visual.in{clip-path:inset(0 0 0% 0) !important;opacity:1 !important;transform:none !important}
   .oss-card{animation:none !important}
+  .glitch::before,.glitch::after{opacity:0 !important}
 }
 
 /* MOBILE */
@@ -613,8 +625,8 @@ footer{padding:32px 40px;border-top:1px solid var(--border);display:flex;justify
       <div class="hero-tag">✦ React Native &amp; Full-Stack Engineer</div>
 
       <h1 class="hero-name">
-        <span>RAVURI</span>
-        <span class="word-2">HARSHA</span>
+        <span class="glitch" data-text="RAVURI">RAVURI</span>
+        <span class="word-2 glitch" data-text="HARSHA">HARSHA</span>
         <span class="word-3">Building production mobile &amp; web systems</span>
       </h1>
 
