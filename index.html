@@ -292,7 +292,7 @@ nav{
 section{padding:120px 40px;position:relative;z-index:2;max-width:1400px;margin:0 auto}
 .s-label{font-family:'Fragment Mono',monospace;font-size:10px;color:var(--p3);letter-spacing:5px;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:12px}
 .s-label::after{content:'';flex:1;height:1px;background:linear-gradient(to right,var(--p3),transparent);max-width:60px}
-.s-title{font-size:clamp(36px,5.5vw,72px);font-weight:700;line-height:1.05;letter-spacing:-2px;margin-bottom:24px}
+.s-title{font-size:clamp(36px,5.5vw,72px);font-weight:700;line-height:1.05;letter-spacing:-2px;margin-bottom:24px;background:linear-gradient(180deg,var(--fg) 0%,var(--fg) 55%,rgba(245,240,255,0.55) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .s-intro{max-width:680px;font-size:17px;line-height:1.8;color:rgba(255,255,255,0.45);margin-bottom:64px;font-weight:400}
 
 /* ABOUT */
@@ -312,15 +312,6 @@ section{padding:120px 40px;position:relative;z-index:2;max-width:1400px;margin:0
 .stat-n{font-size:48px;font-weight:700;color:var(--fg);line-height:1;letter-spacing:-2px;transition:color 0.4s}
 .stat-l{font-family:'Fragment Mono',monospace;font-size:10px;color:rgba(255,255,255,0.3);letter-spacing:3px;text-transform:uppercase;margin-top:6px}
 
-/* PHILOSOPHY */
-#philosophy{background:linear-gradient(180deg,transparent,rgba(184,255,79,0.02),transparent)}
-.philo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:2px}
-.philo-card{background:var(--glass);border:1px solid var(--border);border-radius:16px;padding:28px;transition:all .35s cubic-bezier(.23,1,.32,1)}
-.philo-card:hover{border-color:rgba(184,255,79,0.25);transform:translateY(-4px)}
-.philo-icon{font-family:'Fragment Mono',monospace;font-size:11px;color:var(--p1);letter-spacing:2px;margin-bottom:14px}
-.philo-title{font-size:19px;font-weight:700;margin-bottom:10px}
-.philo-desc{font-size:14px;line-height:1.7;color:rgba(255,255,255,0.4)}
-
 /* SKILLS */
 #skills{background:linear-gradient(180deg,transparent,rgba(255,45,120,0.02),transparent)}
 .skills-container{display:flex;flex-direction:column;gap:2px}
@@ -339,20 +330,6 @@ section{padding:120px 40px;position:relative;z-index:2;max-width:1400px;margin:0
 .chip:hover{background:var(--chip-color,var(--p1));color:#000;border-color:transparent;transform:scale(1.05)}
 .skill-row-icon{font-size:22px;opacity:0.25;transition:opacity 0.3s}
 .skill-row:hover .skill-row-icon{opacity:0.8}
-
-/* ARCHITECTURE */
-#architecture{background:linear-gradient(180deg,transparent,rgba(0,229,255,0.02),transparent)}
-.arch-flow{display:flex;flex-wrap:wrap;gap:12px;align-items:stretch;margin-bottom:48px}
-.arch-node{flex:1;min-width:150px;background:var(--glass);border:1px solid var(--border);border-radius:14px;padding:20px;text-align:center;transition:all .3s}
-.arch-node:hover{border-color:rgba(0,229,255,0.3);transform:translateY(-3px)}
-.arch-node-label{font-family:'Fragment Mono',monospace;font-size:9px;color:var(--p3);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
-.arch-node-name{font-size:15px;font-weight:700}
-.arch-arrow{display:flex;align-items:center;color:rgba(255,255,255,0.2);font-size:18px;flex-shrink:0}
-.arch-principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:16px}
-.arch-principle{border:1px solid var(--border);border-radius:14px;padding:22px;background:rgba(255,255,255,0.02)}
-.arch-principle h4{font-size:14px;letter-spacing:1px;color:var(--p3);margin-bottom:8px;font-family:'Fragment Mono',monospace;text-transform:uppercase}
-.arch-principle p{font-size:13.5px;line-height:1.7;color:rgba(255,255,255,0.4)}
-@media(max-width:700px){.arch-flow{flex-direction:column}.arch-arrow{transform:rotate(90deg);justify-content:center;padding:2px 0}}
 
 /* EXPERIENCE */
 #experience{background:linear-gradient(180deg,transparent,rgba(184,255,79,0.02),transparent)}
@@ -448,7 +425,11 @@ section{padding:120px 40px;position:relative;z-index:2;max-width:1400px;margin:0
   0%,100%{box-shadow:0 0 0 1px rgba(0,229,255,0.12),0 24px 60px -20px rgba(0,229,255,0.08)}
   50%{box-shadow:0 0 0 1px rgba(184,255,79,0.2),0 24px 70px -16px rgba(184,255,79,0.12)}
 }
-.oss-top{display:flex;gap:24px;align-items:center;margin-bottom:28px;flex-wrap:wrap;position:relative;z-index:1}
+.oss-ribbon{position:absolute;top:24px;right:24px;z-index:2;font-family:'Fragment Mono',monospace;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#000;background:linear-gradient(90deg,var(--p1),#d4ff9e);padding:8px 16px;border-radius:99px;box-shadow:0 8px 24px rgba(184,255,79,0.25)}
+.oss-meta{display:flex;flex-wrap:wrap;gap:10px 24px;margin:-10px 0 28px;position:relative;z-index:1}
+.oss-meta span{font-size:12.5px;color:rgba(255,255,255,0.5)}
+.oss-meta b{font-family:'Fragment Mono',monospace;font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--p3);margin-right:6px;font-weight:600}
+.oss-top{display:flex;gap:24px;align-items:center;margin-bottom:28px;flex-wrap:wrap;position:relative;z-index:1;padding-right:150px}
 .oss-logo{width:64px;height:64px;border-radius:16px;overflow:hidden;border:1px solid var(--border);flex-shrink:0;box-shadow:0 8px 30px rgba(0,229,255,0.15);transition:transform .5s var(--ease)}
 .oss-card:hover .oss-logo{transform:scale(1.05) rotate(-3deg)}
 .oss-logo img{width:100%;height:100%;object-fit:cover}
@@ -530,10 +511,10 @@ footer{padding:32px 40px;border-top:1px solid var(--border);display:flex;justify
   footer{flex-direction:column;text-align:center}
   .contact-giant{letter-spacing:-2px}
   .oss-card{padding:28px}
+  .oss-ribbon{position:static;display:inline-block;margin-bottom:16px}
+  .oss-top{padding-right:0}
   .exp-card-header{padding:24px 24px}
   .exp-card-body-inner{padding:0 24px 24px}
-  .arch-flow{flex-direction:column}
-  .arch-arrow{transform:rotate(90deg);justify-content:center;padding:2px 0}
 }
 
 /* SMALL PHONES */
@@ -550,7 +531,7 @@ footer{padding:32px 40px;border-top:1px solid var(--border);display:flex;justify
   .s-title{letter-spacing:-1px}
   .stats-col{flex-direction:column}
   .stat-card{min-width:100%}
-  .philo-grid,.now-grid,.arch-principles,.case-feature-grid,.grid2{grid-template-columns:1fr}
+  .now-grid,.case-feature-grid,.grid2{grid-template-columns:1fr}
   .exp-card-header{padding:20px 18px;gap:12px}
   .exp-card-body-inner{padding:0 18px 20px}
   .exp-company-name{font-size:18px}
@@ -583,8 +564,8 @@ footer{padding:32px 40px;border-top:1px solid var(--border);display:flex;justify
     <a href="#about">About</a>
     <a href="#skills">Stack</a>
     <a href="#projects">Projects</a>
-    <a href="#neardeals">NearDeals</a>
     <a href="#opensource">Open Source</a>
+    <a href="#neardeals">NearDeals</a>
     <a href="#experience">Work</a>
     <a href="/articles">Articles</a>
     <a href="#contact">Contact</a>
@@ -603,8 +584,8 @@ footer{padding:32px 40px;border-top:1px solid var(--border);display:flex;justify
   <a href="#about">About</a>
   <a href="#skills">Stack</a>
   <a href="#projects">Projects</a>
-  <a href="#neardeals">NearDeals</a>
   <a href="#opensource">Open Source</a>
+  <a href="#neardeals">NearDeals</a>
   <a href="#experience">Work</a>
   <a href="/articles">Articles</a>
   <a href="#contact">Contact</a>
@@ -700,44 +681,6 @@ footer{padding:32px 40px;border-top:1px solid var(--border);display:flex;justify
   </div>
 </section>
 
-<section id="philosophy" aria-labelledby="philo-title">
-  <div class="s-label reveal">How I work</div>
-  <h2 class="s-title reveal delay-1" id="philo-title">Engineering Philosophy</h2>
-  <p class="s-intro reveal delay-1">A short set of defaults I apply to every codebase, client or personal — not rules for their own sake, but habits that keep systems alive past launch day.</p>
-  <div class="philo-grid reveal delay-2">
-    <div class="philo-card">
-      <div class="philo-icon">01 · SIMPLICITY</div>
-      <div class="philo-title">Boring on purpose</div>
-      <div class="philo-desc">The simplest solution that satisfies the real constraints wins. Fewer moving parts means fewer failure modes and faster onboarding for the next engineer.</div>
-    </div>
-    <div class="philo-card">
-      <div class="philo-icon">02 · SCALABILITY</div>
-      <div class="philo-title">Design for the next order of magnitude</div>
-      <div class="philo-desc">Data models, indexes, and API contracts are chosen so growth is a config change, not a rewrite — without over-engineering for traffic that may never arrive.</div>
-    </div>
-    <div class="philo-card">
-      <div class="philo-icon">03 · PERFORMANCE</div>
-      <div class="philo-title">Perceived speed is a feature</div>
-      <div class="philo-desc">Caching, pagination, lazy loading, and query design are considered from day one — on mobile especially, latency is UX, not an afterthought.</div>
-    </div>
-    <div class="philo-card">
-      <div class="philo-icon">04 · SECURITY</div>
-      <div class="philo-title">Trust boundaries are explicit</div>
-      <div class="philo-desc">Auth, input validation, and access control live at system boundaries. Internal code trusts its contracts; external input never does.</div>
-    </div>
-    <div class="philo-card">
-      <div class="philo-icon">05 · MAINTAINABILITY</div>
-      <div class="philo-title">Code is read far more than written</div>
-      <div class="philo-desc">Clear module boundaries, predictable naming, and no premature abstraction — so a bug fix six months later doesn't require re-learning the system.</div>
-    </div>
-    <div class="philo-card">
-      <div class="philo-icon">06 · REAL-WORLD</div>
-      <div class="philo-title">Ship it, then own it</div>
-      <div class="philo-desc">Production is the real test. I stay close to crash reports, store reviews, and API metrics after release — not just the commit that shipped.</div>
-    </div>
-  </div>
-</section>
-
 <section id="skills" aria-labelledby="skills-title">
   <div class="s-label reveal">What I use</div>
   <h2 class="s-title reveal delay-1" id="skills-title">Technical Expertise</h2>
@@ -803,51 +746,6 @@ footer{padding:32px 40px;border-top:1px solid var(--border);display:flex;justify
         <span class="chip" style="--chip-color:#ff9500">Crashlytics / Analytics</span>
       </div>
       <div class="skill-row-icon">🏗️</div>
-    </div>
-  </div>
-</section>
-
-<section id="architecture" aria-labelledby="arch-title">
-  <div class="s-label reveal">How I think about systems</div>
-  <h2 class="s-title reveal delay-1" id="arch-title">Architecture Approach</h2>
-  <p class="s-intro reveal delay-1">A typical production request path I design around — client to data, with caching and observability built in rather than bolted on.</p>
-  <div class="arch-flow reveal delay-2" role="img" aria-label="Request flow: Client through API Gateway, Auth, Service Layer, Cache, Database, to Observability">
-    <div class="arch-node"><div class="arch-node-label">Client</div><div class="arch-node-name">RN / Web App</div></div>
-    <div class="arch-arrow">→</div>
-    <div class="arch-node"><div class="arch-node-label">Edge</div><div class="arch-node-name">API Gateway</div></div>
-    <div class="arch-arrow">→</div>
-    <div class="arch-node"><div class="arch-node-label">Security</div><div class="arch-node-name">Auth Layer</div></div>
-    <div class="arch-arrow">→</div>
-    <div class="arch-node"><div class="arch-node-label">Logic</div><div class="arch-node-name">Service Layer</div></div>
-    <div class="arch-arrow">→</div>
-    <div class="arch-node"><div class="arch-node-label">Speed</div><div class="arch-node-name">Cache (Redis)</div></div>
-    <div class="arch-arrow">→</div>
-    <div class="arch-node"><div class="arch-node-label">Persistence</div><div class="arch-node-name">DB (SQL / Mongo)</div></div>
-  </div>
-  <div class="arch-principles reveal delay-3">
-    <div class="arch-principle">
-      <h4>APIs</h4>
-      <p>Versioned REST contracts with clear request/response validation, so mobile clients on older builds keep working after a backend deploy.</p>
-    </div>
-    <div class="arch-principle">
-      <h4>Caching</h4>
-      <p>Redis in front of hot read paths — catalog, search, geo queries — to keep P95 latency low without over-fetching the primary database.</p>
-    </div>
-    <div class="arch-principle">
-      <h4>Databases</h4>
-      <p>Schema and index design driven by real query patterns first, normalization second — indexes on filters that actually run in production.</p>
-    </div>
-    <div class="arch-principle">
-      <h4>Authentication</h4>
-      <p>Token-based auth (JWT / Firebase Auth) with refresh flows designed for mobile — offline tolerance and silent re-auth, not just a login screen.</p>
-    </div>
-    <div class="arch-principle">
-      <h4>Queues &amp; Jobs</h4>
-      <p>Background work — notifications, image processing, OTA bundling — kept off the request path so user-facing latency stays predictable.</p>
-    </div>
-    <div class="arch-principle">
-      <h4>Observability</h4>
-      <p>Crash reporting, structured logs, and analytics wired in from the first release, not added after the first production incident.</p>
     </div>
   </div>
 </section>
@@ -1119,6 +1017,68 @@ footer{padding:32px 40px;border-top:1px solid var(--border);display:flex;justify
   </div>
 </section>
 
+<section id="opensource" aria-labelledby="oss-title">
+  <div class="s-label reveal">Open Source</div>
+  <h2 class="s-title reveal delay-1" id="oss-title">OpenOTA</h2>
+
+  <div class="oss-card reveal delay-2">
+    <div class="oss-ribbon">★ Featured Open Source</div>
+    <div class="oss-top">
+      <div class="oss-logo"><img src="assets/openota-logo.png" alt="OpenOTA logo" loading="lazy" width="64" height="64"></div>
+      <div class="oss-titles">
+        <span>My Open Source Contribution</span>
+        <h3>Over-the-Air Updates for React Native</h3>
+      </div>
+    </div>
+
+    <p class="oss-desc">OpenOTA is a project I created and maintain in the open — an over-the-air (OTA) update system for React Native apps. It lets teams ship JavaScript-bundle updates directly to users, without waiting on app-store review for every change, while keeping releases organized, reversible, and safe.</p>
+
+    <div class="oss-meta">
+      <span><b>License</b> MIT</span>
+      <span><b>Stack</b> React Native · Node.js</span>
+      <span><b>Status</b> Active · Open Source</span>
+    </div>
+
+    <h4 style="font-family:'Fragment Mono',monospace;font-size:11px;color:var(--p3);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;position:relative;z-index:1">OTA workflow</h4>
+    <div class="oss-workflow">
+      <div class="oss-step"><b>1</b> Build JS bundle</div>
+      <div class="oss-step-arrow">→</div>
+      <div class="oss-step"><b>2</b> Publish to a release channel</div>
+      <div class="oss-step-arrow">→</div>
+      <div class="oss-step"><b>3</b> App checks &amp; downloads update</div>
+      <div class="oss-step-arrow">→</div>
+      <div class="oss-step"><b>4</b> Apply on next launch</div>
+      <div class="oss-step-arrow">→</div>
+      <div class="oss-step"><b>5</b> Roll back instantly if needed</div>
+    </div>
+
+    <div class="case-feature-grid" style="position:relative;z-index:1;margin-bottom:32px">
+      <div class="case-feature">
+        <div class="case-feature-t">React Native integration</div>
+        <div class="case-feature-d">A lightweight client SDK checks for and applies bundle updates with minimal app-side integration effort.</div>
+      </div>
+      <div class="case-feature">
+        <div class="case-feature-t">Release channels</div>
+        <div class="case-feature-d">Ship to staging, beta, or production channels independently — test an update before it reaches every user.</div>
+      </div>
+      <div class="case-feature">
+        <div class="case-feature-t">Rollback</div>
+        <div class="case-feature-d">A bad release can be reverted immediately without publishing a new app-store build.</div>
+      </div>
+      <div class="case-feature">
+        <div class="case-feature-t">Developer workflow</div>
+        <div class="case-feature-d">Deployment is designed to slot into an existing CI/CD pipeline rather than replace it.</div>
+      </div>
+    </div>
+
+    <div class="oss-links">
+      <a href="/openota" class="card-link">↗ Full Case Study Page</a>
+      <a href="https://github.com/HarshaJrDev/OpenOTA" target="_blank" rel="noopener" class="card-link">⌥ GitHub Repository</a>
+      <a href="https://github.com/HarshaJrDev/OpenOTA#readme" target="_blank" rel="noopener" class="card-link">📄 Documentation</a>
+    </div>
+  </div>
+</section>
+
 <section id="neardeals" aria-labelledby="neardeals-title">
   <div class="case-header reveal">
     <div class="case-title-wrap">
@@ -1192,61 +1152,6 @@ footer{padding:32px 40px;border-top:1px solid var(--border);display:flex;justify
   </div>
 </section>
 
-<section id="opensource" aria-labelledby="oss-title">
-  <div class="s-label reveal">Open Source</div>
-  <h2 class="s-title reveal delay-1" id="oss-title">OpenOTA</h2>
-
-  <div class="oss-card reveal delay-2">
-    <div class="oss-top">
-      <div class="oss-logo"><img src="assets/openota-logo.png" alt="OpenOTA logo" loading="lazy" width="64" height="64"></div>
-      <div class="oss-titles">
-        <span>My Open Source Contribution</span>
-        <h3>Over-the-Air Updates for React Native</h3>
-      </div>
-    </div>
-
-    <p class="oss-desc">OpenOTA is a project I created and maintain in the open — an over-the-air (OTA) update system for React Native apps. It lets teams ship JavaScript-bundle updates directly to users, without waiting on app-store review for every change, while keeping releases organized, reversible, and safe.</p>
-
-    <h4 style="font-family:'Fragment Mono',monospace;font-size:11px;color:var(--p3);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;position:relative;z-index:1">OTA workflow</h4>
-    <div class="oss-workflow">
-      <div class="oss-step"><b>1</b> Build JS bundle</div>
-      <div class="oss-step-arrow">→</div>
-      <div class="oss-step"><b>2</b> Publish to a release channel</div>
-      <div class="oss-step-arrow">→</div>
-      <div class="oss-step"><b>3</b> App checks &amp; downloads update</div>
-      <div class="oss-step-arrow">→</div>
-      <div class="oss-step"><b>4</b> Apply on next launch</div>
-      <div class="oss-step-arrow">→</div>
-      <div class="oss-step"><b>5</b> Roll back instantly if needed</div>
-    </div>
-
-    <div class="case-feature-grid" style="position:relative;z-index:1;margin-bottom:32px">
-      <div class="case-feature">
-        <div class="case-feature-t">React Native integration</div>
-        <div class="case-feature-d">A lightweight client SDK checks for and applies bundle updates with minimal app-side integration effort.</div>
-      </div>
-      <div class="case-feature">
-        <div class="case-feature-t">Release channels</div>
-        <div class="case-feature-d">Ship to staging, beta, or production channels independently — test an update before it reaches every user.</div>
-      </div>
-      <div class="case-feature">
-        <div class="case-feature-t">Rollback</div>
-        <div class="case-feature-d">A bad release can be reverted immediately without publishing a new app-store build.</div>
-      </div>
-      <div class="case-feature">
-        <div class="case-feature-t">Developer workflow</div>
-        <div class="case-feature-d">Deployment is designed to slot into an existing CI/CD pipeline rather than replace it.</div>
-      </div>
-    </div>
-
-    <div class="oss-links">
-      <a href="/openota" class="card-link">↗ Full Case Study Page</a>
-      <a href="https://github.com/HarshaJrDev/OpenOTA" target="_blank" rel="noopener" class="card-link">⌥ GitHub Repository</a>
-      <a href="https://github.com/HarshaJrDev/OpenOTA#readme" target="_blank" rel="noopener" class="card-link">📄 Documentation</a>
-    </div>
-  </div>
-</section>
-
 <section id="contact" aria-labelledby="contact-title">
   <h2 class="contact-giant reveal" id="contact-title">
     <div>LET'S</div>
@@ -1271,8 +1176,8 @@ footer{padding:32px 40px;border-top:1px solid var(--border);display:flex;justify
 <footer>
   <div class="footer-left">© 2026 <span>RAVURI HARSHA VARDHAN</span></div>
   <div class="footer-links">
-    <a href="/neardeals">NearDeals</a>
     <a href="/openota">OpenOTA</a>
+    <a href="/neardeals">NearDeals</a>
     <a href="/articles">Articles</a>
     <a href="https://github.com/HarshaJrDev" target="_blank" rel="noopener">GitHub</a>
     <a href="https://www.linkedin.com/in/ravuri-harshavardhan-52220726b/" target="_blank" rel="noopener">LinkedIn</a>
@@ -1440,10 +1345,13 @@ const cObs = new IntersectionObserver(entries => {
 }, { threshold: 0.5 });
 document.querySelectorAll('.stat-n[data-target]').forEach(el => cObs.observe(el));
 
-// NAV HIDE ON SCROLL + SCROLL PROGRESS
+// NAV HIDE ON SCROLL + SCROLL PROGRESS + HERO PARALLAX
 let lastY = 0;
 const navEl = document.getElementById('nav');
 const scrollProgress = document.getElementById('scrollProgress');
+const heroMesh = document.querySelector('#hero .hero-grid');
+const heroSectionEl = document.getElementById('hero');
+const allowParallax = !window.matchMedia('(prefers-reduced-motion: reduce)').matches && !window.matchMedia('(hover: none)').matches;
 let progressTicking = false;
 function updateScrollFx() {
   const y = window.scrollY;
@@ -1452,6 +1360,12 @@ function updateScrollFx() {
   const docHeight = document.documentElement.scrollHeight - window.innerHeight;
   const pct = docHeight > 0 ? Math.min(y / docHeight, 1) : 0;
   scrollProgress.style.transform = `scaleX(${pct})`;
+  if (allowParallax && heroMesh && heroSectionEl) {
+    const heroHeight = heroSectionEl.offsetHeight;
+    if (y < heroHeight) {
+      heroMesh.style.transform = `translateY(${y * 0.15}px)`;
+    }
+  }
   progressTicking = false;
 }
 window.addEventListener('scroll', () => {
